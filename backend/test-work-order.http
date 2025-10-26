@@ -1,0 +1,152 @@
+### 변수 설정
+@baseUrl = http://localhost:8080
+@contentType = application/json
+
+### ===========================================
+### 작업지시 API 테스트
+### ===========================================
+
+### 1. 작업지시 생성 - TS-100 제품
+POST {{baseUrl}}/api/work-orders
+Content-Type: {{contentType}}
+
+{
+  "orderNo": "WO-2025-001",
+  "productId": 1,
+  "quantity": 1000,
+  "orderDate": "2025-01-15"
+}
+
+### 2. 작업지시 생성 - HS-200 제품
+POST {{baseUrl}}/api/work-orders
+Content-Type: {{contentType}}
+
+{
+  "orderNo": "WO-2025-002",
+  "productId": 2,
+  "quantity": 500,
+  "orderDate": "2025-01-15"
+}
+
+### 3. 작업지시 생성 - PS-300 제품
+POST {{baseUrl}}/api/work-orders
+Content-Type: {{contentType}}
+
+{
+  "orderNo": "WO-2025-003",
+  "productId": 3,
+  "quantity": 800,
+  "orderDate": "2025-01-16"
+}
+
+### 4. 전체 작업지시 목록 조회
+GET {{baseUrl}}/api/work-orders
+Accept: {{contentType}}
+
+### 5. 작업지시 단건 조회 (ID)
+GET {{baseUrl}}/api/work-orders/1
+Accept: {{contentType}}
+
+### 6. 작업지시 단건 조회 (지시번호)
+GET {{baseUrl}}/api/work-orders/order-no/WO-2025-001
+Accept: {{contentType}}
+
+### 7. 상태별 조회 - PLANNED
+GET {{baseUrl}}/api/work-orders?status=PLANNED
+Accept: {{contentType}}
+
+### ===========================================
+### 작업지시 상태 변경 테스트
+### ===========================================
+
+### 8. 작업지시 시작 (PLANNED → IN_PROGRESS)
+PATCH {{baseUrl}}/api/work-orders/1/status
+Content-Type: {{contentType}}
+
+{
+  "status": "IN_PROGRESS"
+}
+
+### 9. 작업지시 완료 (IN_PROGRESS → COMPLETED)
+PATCH {{baseUrl}}/api/work-orders/1/status
+Content-Type: {{contentType}}
+
+{
+  "status": "COMPLETED"
+}
+
+### 10. 작업지시 2번 시작
+PATCH {{baseUrl}}/api/work-orders/2/status
+Content-Type: {{contentType}}
+
+{
+  "status": "IN_PROGRESS"
+}
+
+### 11. 상태별 조회 - IN_PROGRESS
+GET {{baseUrl}}/api/work-orders?status=IN_PROGRESS
+Accept: {{contentType}}
+
+### 12. 상태별 조회 - COMPLETED
+GET {{baseUrl}}/api/work-orders?status=COMPLETED
+Accept: {{contentType}}
+
+### ===========================================
+### 예외 처리 테스트
+### ===========================================
+
+### 13. 중복 지시번호 생성 (400 예상)
+POST {{baseUrl}}/api/work-orders
+Content-Type: {{contentType}}
+
+{
+  "orderNo": "WO-2025-001",
+  "productId": 1,
+  "quantity": 100,
+  "orderDate": "2025-01-15"
+}
+
+### 14. 존재하지 않는 제품으로 생성 (404 예상)
+POST {{baseUrl}}/api/work-orders
+Content-Type: {{contentType}}
+
+{
+  "orderNo": "WO-2025-999",
+  "productId": 999,
+  "quantity": 100,
+  "orderDate": "2025-01-15"
+}
+
+### 15. 잘못된 지시번호 형식 (400 Validation 예상)
+POST {{baseUrl}}/api/work-orders
+Content-Type: {{contentType}}
+
+{
+  "orderNo": "INVALID-001",
+  "productId": 1,
+  "quantity": 100,
+  "orderDate": "2025-01-15"
+}
+
+### 16. 수량이 0 (400 Validation 예상)
+POST {{baseUrl}}/api/work-orders
+Content-Type: {{contentType}}
+
+{
+  "orderNo": "WO-2025-100",
+  "productId": 1,
+  "quantity": 0,
+  "orderDate": "2025-01-15"
+}
+
+### 17. 잘못된 상태 전환 (완료 → 진행 중, 400 예상)
+PATCH {{baseUrl}}/api/work-orders/1/status
+Content-Type: {{contentType}}
+
+{
+  "status": "IN_PROGRESS"
+}
+
+### 18. 존재하지 않는 작업지시 (404 예상)
+GET {{baseUrl}}/api/work-orders/999
+Accept: {{contentType}}

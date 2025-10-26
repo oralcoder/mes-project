@@ -1,0 +1,66 @@
+# ========================================
+# 공통 설정 (모든 환경에서 사용)
+# ========================================
+
+# 애플리케이션 정보
+spring:
+  application:
+    # 애플리케이션 이름
+    name: mes-backend
+
+  # JPA 공통 설정
+  jpa:
+    # Open-in-View 패턴 비활성화 (권장)
+    # Controller에서 Lazy Loading 방지
+    open-in-view: false
+
+    # Hibernate 속성
+    properties:
+      hibernate:
+        # SQL 포맷팅 (읽기 쉽게)
+        format_sql: true
+
+        # SQL 주석 출력 (쿼리 출처 확인)
+        use_sql_comments: true
+
+        # 배치 사이즈 설정 (성능 최적화)
+        jdbc:
+          batch_size: 20
+
+        # 배치 순서 정렬 (배치 효율성 향상)
+        order_inserts: true
+        order_updates: true
+
+# 서버 설정
+server:
+  # 서버 포트
+  port: 8080
+
+  # 에러 응답 설정
+  error:
+    # 에러 응답에 stacktrace 포함 여부
+    include-stacktrace: never
+
+    # 에러 응답에 message 포함
+    include-message: always
+
+# Actuator 설정 (헬스체크)
+management:
+  endpoints:
+    web:
+      exposure:
+        # 헬스체크 엔드포인트만 노출
+        include: health
+  endpoint:
+    health:
+      # 헬스체크 상세 정보 표시
+      show-details: always
+
+# 로깅 설정
+logging:
+  level:
+    # 루트 로거 (전체 애플리케이션)
+    root: INFO
+
+    # MES 패키지 (우리 코드)
+    com.mes.backend: DEBUG

@@ -1,0 +1,4 @@
+
+### Spring Boot Actuator Health Check
+GET http://localhost:8080/actuator/health
+Accept: application/json

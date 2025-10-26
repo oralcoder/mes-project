@@ -1,0 +1,67 @@
+# ========================================
+# 운영 환경 전용 설정
+# ========================================
+
+spring:
+  # 데이터소스 설정 (환경변수 사용 - 보안)
+  datasource:
+    # 환경변수로 주입 (필수)
+    # Docker 실행 시: docker run -e DB_URL=... -e DB_USERNAME=... -e DB_PASSWORD=...
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+    # HikariCP 설정 (운영 환경 최적화)
+    hikari:
+      pool-name: MES-HikariCP-PROD
+
+      # 최대 커넥션 수 (운영 환경은 많게)
+      maximum-pool-size: 20
+
+      # 최소 유휴 커넥션 수
+      minimum-idle: 10
+
+      # 커넥션 타임아웃
+      connection-timeout: 30000
+
+      # 유휴 타임아웃
+      idle-timeout: 600000
+
+      # 최대 수명 (30분)
+      max-lifetime: 1800000
+
+      # 커넥션 테스트 쿼리
+      connection-test-query: SELECT 1
+
+  # JPA 운영 환경 설정
+  jpa:
+    # DDL 자동 생성 비활성화 (운영에서는 절대 금지!)
+    # Flyway나 Liquibase 같은 마이그레이션 도구 사용 권장
+    hibernate:
+      ddl-auto: none
+
+    # SQL 로그 출력 비활성화 (성능)
+    show-sql: false
+
+# 로깅 레벨 (운영 환경 - 최소)
+logging:
+  level:
+    root: WARN
+    com.mes.backend: INFO
+
+  # 로그 파일 설정
+  file:
+    # 로그 파일 경로
+    name: /var/log/mes/backend.log
+
+    # 로그 파일 최대 크기
+    max-size: 10MB
+
+    # 로그 파일 보관 기간 (일)
+    max-history: 30
+
+  # 로그 패턴
+  pattern:
+    # 파일 로그 패턴 (JSON 형태 권장)
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

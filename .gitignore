@@ -1,0 +1,7 @@
+backend/build/
+backend/.gradle/
+postgres-data/
+.idea/
+.vscode/
+*.iml
+*.log

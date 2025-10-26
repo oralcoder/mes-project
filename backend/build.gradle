@@ -1,0 +1,79 @@
+// Gradle 플러그인 설정
+plugins {
+    id 'java'                                      // Java 플러그인
+    id 'org.springframework.boot' version '3.2.7'  // Spring Boot 플러그인
+    id 'io.spring.dependency-management' version '1.1.7'  // 의존성 관리
+}
+
+// 프로젝트 메타데이터
+group = 'com.mes'
+version = '0.0.1-SNAPSHOT'
+description = 'MES Backend API'
+
+// Java 버전 설정
+java {
+    sourceCompatibility = '17'
+}
+
+// Lombok 설정
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+// Maven 중앙 저장소 사용
+repositories {
+    mavenCentral()
+}
+
+// 의존성 라이브러리
+dependencies {
+    // ===== Spring Boot Starters =====
+
+    // Spring Boot Web (REST API 개발)
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Spring Data JPA (데이터베이스 연동)
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Validation (입력값 검증)
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Actuator (헬스체크, 모니터링)
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // ===== 데이터베이스 =====
+
+    // PostgreSQL 드라이버
+    runtimeOnly 'org.postgresql:postgresql'
+
+    // ===== 유틸리티 =====
+
+    // Lombok (보일러플레이트 코드 제거)
+    // @Getter, @Setter, @Builder, @Slf4j 등
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // ===== 개발 도구 =====
+
+    // Spring Boot DevTools (자동 재시작, 라이브 리로드)
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // ===== 테스트 =====
+
+    // 테스트 의존성 (JUnit 5, Mockito, AssertJ 등)
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+// 테스트 설정
+tasks.named('test') {
+    // JUnit Platform 사용
+    useJUnitPlatform()
+}
+
+// ===== Gradle Wrapper 버전 설정 =====
+// gradlew 파일이 사용할 Gradle 버전
+wrapper {
+    gradleVersion = '8.5'
+}
