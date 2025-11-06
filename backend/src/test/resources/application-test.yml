@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    # H2 인메모리 DB 사용 (테스트용)
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    # 테스트마다 스키마 자동 생성
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        # SQL 로그 출력 (디버깅용)
+        show_sql: true
+        format_sql: true
+
+  h2:
+    console:
+      enabled: true
+
+# 로깅 레벨 설정
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

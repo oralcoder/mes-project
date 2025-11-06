@@ -2,3 +2,259 @@
 ### Spring Boot Actuator Health Check
 GET http://localhost:8080/actuator/health
 Accept: application/json
+
+### 변수 설정
+@baseUrl = http://localhost:8080
+@contentType = application/json
+
+### ===========================================
+### 제품 API 테스트
+### ===========================================
+
+### 1. 전체 제품 목록 조회
+GET {{baseUrl}}/api/products
+Accept: {{contentType}}
+
+### 2. 제품 생성 - 온도센서 모듈
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "온도센서 모듈 TS-100",
+  "code": "TS100",
+  "spec": "10mm x 10mm",
+  "unit": "EA"
+}
+
+### 3. 제품 생성 - 습도센서 모듈
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "습도센서 모듈 HS-200",
+  "code": "HS200",
+  "spec": "15mm x 15mm",
+  "unit": "EA"
+}
+
+### 4. 제품 생성 - 압력센서 모듈
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "압력센서 모듈 PS-300",
+  "code": "PS300",
+  "spec": "20mm x 20mm",
+  "unit": "BOX"
+}
+
+### 5. 제품 단건 조회 (ID=1)
+GET {{baseUrl}}/api/products/1
+Accept: {{contentType}}
+
+### 6. 제품 단건 조회 (ID=2)
+GET {{baseUrl}}/api/products/2
+Accept: {{contentType}}
+
+### 7. 전체 제품 목록 다시 조회 (생성된 제품 확인)
+GET {{baseUrl}}/api/products
+Accept: {{contentType}}
+
+### ===========================================
+### 검증(Validation) 테스트
+### ===========================================
+
+### 8. 제품명 누락 (400 Bad Request 예상)
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "code": "TEST001",
+  "unit": "EA"
+}
+
+### 9. 제품 코드 형식 오류 (400 Bad Request 예상)
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "테스트 제품",
+  "code": "test001",
+  "unit": "EA"
+}
+
+### 10. 중복 제품 코드 (400 Bad Request 예상)
+POST {{baseUrl}}/api/products
+Content-Type: {{contentType}}
+
+{
+  "name": "중복 테스트",
+  "code": "TS100",
+  "unit": "EA"
+}
+
+### 11. 존재하지 않는 제품 조회 (404 Not Found 예상)
+GET {{baseUrl}}/api/products/999
+Accept: {{contentType}}
+
+
+### ===========================================
+### 공정 API 테스트
+### ===========================================
+
+### 1. 공정 생성 - 부품준비
+POST {{baseUrl}}/api/processes
+Content-Type: {{contentType}}
+
+{
+  "name": "부품준비",
+  "sequence": 1,
+  "description": "센서 제조에 필요한 부품을 준비하는 공정"
+}
+
+### 2. 공정 생성 - 조립
+POST {{baseUrl}}/api/processes
+Content-Type: {{contentType}}
+
+{
+  "name": "조립",
+  "sequence": 2,
+  "description": "부품을 조립하여 센서 모듈을 제작하는 공정"
+}
+
+### 3. 공정 생성 - 검사
+POST {{baseUrl}}/api/processes
+Content-Type: {{contentType}}
+
+{
+  "name": "검사",
+  "sequence": 3,
+  "description": "조립된 센서 모듈의 품질을 검사하는 공정"
+}
+
+### 4. 공정 생성 - 포장
+POST {{baseUrl}}/api/processes
+Content-Type: {{contentType}}
+
+{
+  "name": "포장",
+  "sequence": 4,
+  "description": "검사를 통과한 제품을 포장하는 공정"
+}
+
+### 5. 전체 공정 목록 조회
+GET {{baseUrl}}/api/processes
+Accept: {{contentType}}
+
+### 6. 공정 단건 조회 (ID=1)
+GET {{baseUrl}}/api/processes/1
+Accept: {{contentType}}
+
+### ===========================================
+### 스테이션 API 테스트
+### ===========================================
+
+### 7. 스테이션 생성 - 부품준비 공정
+POST {{baseUrl}}/api/stations
+Content-Type: {{contentType}}
+
+{
+  "name": "부품준비 스테이션 A",
+  "code": "STATION-A",
+  "processId": 1,
+  "status": "RUNNING"
+}
+
+### 8. 스테이션 생성 - 조립 공정
+POST {{baseUrl}}/api/stations
+Content-Type: {{contentType}}
+
+{
+  "name": "조립 스테이션 B",
+  "code": "STATION-B",
+  "processId": 2,
+  "status": "RUNNING"
+}
+
+### 9. 스테이션 생성 - 검사 공정
+POST {{baseUrl}}/api/stations
+Content-Type: {{contentType}}
+
+{
+  "name": "검사 스테이션 C",
+  "code": "STATION-C",
+  "processId": 3,
+  "status": "STOPPED"
+}
+
+### 10. 스테이션 생성 - 포장 공정
+POST {{baseUrl}}/api/stations
+Content-Type: {{contentType}}
+
+{
+  "name": "포장 스테이션 D",
+  "code": "STATION-D",
+  "processId": 4,
+  "status": "RUNNING"
+}
+
+### 11. 전체 스테이션 목록 조회
+GET {{baseUrl}}/api/stations
+Accept: {{contentType}}
+
+### 12. 스테이션 단건 조회 (ID=1)
+GET {{baseUrl}}/api/stations/1
+Accept: {{contentType}}
+
+### 13. 공정별 스테이션 조회 (부품준비)
+GET {{baseUrl}}/api/stations?processId=1
+Accept: {{contentType}}
+
+### ===========================================
+### 예외 처리 테스트
+### ===========================================
+
+### 14. 존재하지 않는 공정 조회 (404 예상)
+GET {{baseUrl}}/api/processes/999
+Accept: {{contentType}}
+
+### 15. 중복 공정명 생성 (400 예상)
+POST {{baseUrl}}/api/processes
+Content-Type: {{contentType}}
+
+{
+  "name": "부품준비",
+  "sequence": 5,
+  "description": "중복 테스트"
+}
+
+### 16. 공정명 누락 (400 Validation 예상)
+POST {{baseUrl}}/api/processes
+Content-Type: {{contentType}}
+
+{
+  "sequence": 5,
+  "description": "검증 테스트"
+}
+
+### 17. 존재하지 않는 공정에 스테이션 생성 (400 예상)
+POST {{baseUrl}}/api/stations
+Content-Type: {{contentType}}
+
+{
+  "name": "테스트 스테이션",
+  "code": "STATION-TEST",
+  "processId": 999,
+  "status": "RUNNING"
+}
+
+### 18. 중복 스테이션 코드 (400 예상)
+POST {{baseUrl}}/api/stations
+Content-Type: {{contentType}}
+
+{
+  "name": "중복 테스트",
+  "code": "STATION-A",
+  "processId": 1,
+  "status": "RUNNING"
+}

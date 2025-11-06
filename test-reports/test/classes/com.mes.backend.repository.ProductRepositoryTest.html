@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Product Repository 테스트</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Product Repository 테스트</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.mes.backend.repository.html">com.mes.backend.repository</a> &gt; ProductRepositoryTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">7</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.658s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a href="#">Tests</a>
+</li>
+<li>
+<a href="#">Standard output</a>
+</li>
+</ul>
+<div class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Method name</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">제품 개수 확인 테스트</td>
+<td class="success">testCountProducts()</td>
+<td class="success">0.033s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">제품 삭제 테스트</td>
+<td class="success">testDeleteProduct()</td>
+<td class="success">0.011s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">전체 제품 조회 테스트</td>
+<td class="success">testFindAll()</td>
+<td class="success">0.568s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">ID로 제품 조회 테스트</td>
+<td class="success">testFindById()</td>
+<td class="success">0.014s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">존재하지 않는 ID로 조회 테스트</td>
+<td class="success">testFindByIdNotFound()</td>
+<td class="success">0.009s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">제품 저장 테스트</td>
+<td class="success">testSaveProduct()</td>
+<td class="success">0.013s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">제품 수정 테스트</td>
+<td class="success">testUpdateProduct()</td>
+<td class="success">0.010s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>17:21:51.810 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.mes.backend.repository.ProductRepositoryTest]: ProductRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+17:21:51.944 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.mes.backend.BackendApplication for test class com.mes.backend.repository.ProductRepositoryTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.7)
+
+2025-10-30T17:21:52.240Z  INFO 1811 --- [mes-backend] [    Test worker] c.m.b.repository.ProductRepositoryTest   : Starting ProductRepositoryTest using Java 17.0.2 with PID 1811 (started by root in /app)
+2025-10-30T17:21:52.241Z DEBUG 1811 --- [mes-backend] [    Test worker] c.m.b.repository.ProductRepositoryTest   : Running with Spring Boot v3.2.7, Spring v6.1.10
+2025-10-30T17:21:52.241Z  INFO 1811 --- [mes-backend] [    Test worker] c.m.b.repository.ProductRepositoryTest   : The following 1 profile is active: &quot;test&quot;
+2025-10-30T17:21:52.602Z  INFO 1811 --- [mes-backend] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-30T17:21:52.660Z  INFO 1811 --- [mes-backend] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 52 ms. Found 4 JPA repository interfaces.
+2025-10-30T17:21:52.713Z  INFO 1811 --- [mes-backend] [    Test worker] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2025-10-30T17:21:52.856Z  INFO 1811 --- [mes-backend] [    Test worker] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:9761b33b-e904-4798-b6b3-e38179c18bca;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2025-10-30T17:21:53.082Z  INFO 1811 --- [mes-backend] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-30T17:21:53.124Z  INFO 1811 --- [mes-backend] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.9.Final
+2025-10-30T17:21:53.154Z  INFO 1811 --- [mes-backend] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-30T17:21:53.341Z  INFO 1811 --- [mes-backend] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-30T17:21:54.081Z  INFO 1811 --- [mes-backend] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-30T17:21:54.090Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    drop table if exists process cascade 
+Hibernate: 
+    drop table if exists process cascade 
+2025-10-30T17:21:54.092Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    drop table if exists product cascade 
+Hibernate: 
+    drop table if exists product cascade 
+2025-10-30T17:21:54.093Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    drop table if exists station cascade 
+Hibernate: 
+    drop table if exists station cascade 
+2025-10-30T17:21:54.093Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    drop table if exists work_order cascade 
+Hibernate: 
+    drop table if exists work_order cascade 
+2025-10-30T17:21:54.097Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    create table process (
+        sequence integer not null,
+        created_at timestamp(6) not null,
+        id bigint generated by default as identity,
+        updated_at timestamp(6) not null,
+        name varchar(100) not null,
+        description TEXT,
+        primary key (id)
+    )
+Hibernate: 
+    create table process (
+        sequence integer not null,
+        created_at timestamp(6) not null,
+        id bigint generated by default as identity,
+        updated_at timestamp(6) not null,
+        name varchar(100) not null,
+        description TEXT,
+        primary key (id)
+    )
+2025-10-30T17:21:54.105Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    create table product (
+        created_at timestamp(6) not null,
+        id bigint generated by default as identity,
+        updated_at timestamp(6) not null,
+        unit varchar(20) not null,
+        code varchar(50) not null unique,
+        name varchar(100) not null,
+        spec varchar(200),
+        primary key (id)
+    )
+Hibernate: 
+    create table product (
+        created_at timestamp(6) not null,
+        id bigint generated by default as identity,
+        updated_at timestamp(6) not null,
+        unit varchar(20) not null,
+        code varchar(50) not null unique,
+        name varchar(100) not null,
+        spec varchar(200),
+        primary key (id)
+    )
+2025-10-30T17:21:54.108Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    create table station (
+        created_at timestamp(6) not null,
+        id bigint generated by default as identity,
+        process_id bigint not null,
+        updated_at timestamp(6) not null,
+        status varchar(20) not null check (status in ('RUNNING','STOPPED','FAULT','MAINTENANCE')),
+        code varchar(50) not null unique,
+        name varchar(100) not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table station (
+        created_at timestamp(6) not null,
+        id bigint generated by default as identity,
+        process_id bigint not null,
+        updated_at timestamp(6) not null,
+        status varchar(20) not null check (status in ('RUNNING','STOPPED','FAULT','MAINTENANCE')),
+        code varchar(50) not null unique,
+        name varchar(100) not null,
+        primary key (id)
+    )
+2025-10-30T17:21:54.113Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    create table work_order (
+        order_date date not null,
+        quantity integer not null,
+        created_at timestamp(6) not null,
+        end_date timestamp(6),
+        id bigint generated by default as identity,
+        product_id bigint not null,
+        start_date timestamp(6),
+        updated_at timestamp(6) not null,
+        status varchar(20) not null check (status in ('PLANNED','IN_PROGRESS','COMPLETED','CANCELLED')),
+        order_no varchar(50) not null unique,
+        primary key (id)
+    )
+Hibernate: 
+    create table work_order (
+        order_date date not null,
+        quantity integer not null,
+        created_at timestamp(6) not null,
+        end_date timestamp(6),
+        id bigint generated by default as identity,
+        product_id bigint not null,
+        start_date timestamp(6),
+        updated_at timestamp(6) not null,
+        status varchar(20) not null check (status in ('PLANNED','IN_PROGRESS','COMPLETED','CANCELLED')),
+        order_no varchar(50) not null unique,
+        primary key (id)
+    )
+2025-10-30T17:21:54.116Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    alter table if exists station 
+       add constraint FKeo67ow1pynkud46q5s582mc4q 
+       foreign key (process_id) 
+       references process
+Hibernate: 
+    alter table if exists station 
+       add constraint FKeo67ow1pynkud46q5s582mc4q 
+       foreign key (process_id) 
+       references process
+2025-10-30T17:21:54.122Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    alter table if exists work_order 
+       add constraint FKl0to285uaxdg2siljxu4614q5 
+       foreign key (product_id) 
+       references product
+Hibernate: 
+    alter table if exists work_order 
+       add constraint FKl0to285uaxdg2siljxu4614q5 
+       foreign key (product_id) 
+       references product
+2025-10-30T17:21:54.126Z  INFO 1811 --- [mes-backend] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-30T17:21:54.431Z  INFO 1811 --- [mes-backend] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-10-30T17:21:54.902Z  INFO 1811 --- [mes-backend] [    Test worker] c.m.b.repository.ProductRepositoryTest   : Started ProductRepositoryTest in 2.896 seconds (process running for 3.805)
+2025-10-30T17:21:55.394Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+2025-10-30T17:21:55.414Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+2025-10-30T17:21:55.416Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+2025-10-30T17:21:55.464Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    /* &lt;criteria&gt; */ select
+        p1_0.id,
+        p1_0.code,
+        p1_0.created_at,
+        p1_0.name,
+        p1_0.spec,
+        p1_0.unit,
+        p1_0.updated_at 
+    from
+        product p1_0
+Hibernate: 
+    /* &lt;criteria&gt; */ select
+        p1_0.id,
+        p1_0.code,
+        p1_0.created_at,
+        p1_0.name,
+        p1_0.spec,
+        p1_0.unit,
+        p1_0.updated_at 
+    from
+        product p1_0
+2025-10-30T17:21:55.489Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+2025-10-30T17:21:55.503Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+2025-10-30T17:21:55.507Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+2025-10-30T17:21:55.528Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    /* select
+        count(*) 
+    from
+        Product x */ select
+            count(*) 
+        from
+            product p1_0
+Hibernate: 
+    /* select
+        count(*) 
+    from
+        Product x */ select
+            count(*) 
+        from
+            product p1_0
+2025-10-30T17:21:55.537Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+2025-10-30T17:21:55.554Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    select
+        p1_0.id,
+        p1_0.code,
+        p1_0.created_at,
+        p1_0.name,
+        p1_0.spec,
+        p1_0.unit,
+        p1_0.updated_at 
+    from
+        product p1_0 
+    where
+        p1_0.id=?
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.code,
+        p1_0.created_at,
+        p1_0.name,
+        p1_0.spec,
+        p1_0.unit,
+        p1_0.updated_at 
+    from
+        product p1_0 
+    where
+        p1_0.id=?
+2025-10-30T17:21:55.562Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+2025-10-30T17:21:55.575Z DEBUG 1811 --- [mes-backend] [    Test worker] org.hibernate.SQL                        : 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    /* insert for
+        com.mes.backend.entity.Product */insert 
+    into
+        product (code, created_at, name, spec, unit, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?, default)
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="https://www.gradle.org">Gradle 8.14.3</a> at Oct 30, 2025, 5:21:55 PM</p>
+</div>
+</div>
+</body>
+</html>
