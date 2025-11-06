@@ -3,6 +3,8 @@ import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import ProductList from './pages/ProductList';
 import WorkOrderList from './pages/WorkOrderList';
 import WorkOrderForm from './pages/WorkOrderForm';
+import Dashboard from './pages/Dashboard';
+
 
 function App() {
   const location = useLocation(); // 현재 경로 정보
@@ -25,6 +27,16 @@ function App() {
             
             {/* 네비게이션 */}
             <nav className="flex space-x-4">
+              <Link 
+                to="/dashboard" 
+                className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                  isActive('/dashboard')
+                    ? 'text-white bg-blue-600'
+                    : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
+                }`}
+              >
+                대시보드
+              </Link>              
               <Link 
                 to="/products" 
                 className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
@@ -67,6 +79,9 @@ function App() {
         <Routes>
           {/* 기본 경로: 제품 목록으로 리다이렉트 */}
           <Route path="/" element={<ProductList />} />
+
+          {/* 대시보드 */}
+          <Route path="/dashboard" element={<Dashboard />} />
           
           {/* 제품 관련 경로 */}
           <Route path="/products" element={<ProductList />} />

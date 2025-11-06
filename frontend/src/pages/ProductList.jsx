@@ -1,6 +1,7 @@
 // 제품 목록 페이지 컴포넌트
 import { useState, useEffect } from 'react';
 import { getAllProducts } from '../services/productService';
+import LoadingSpinner from '../components/LoadingSpinner'; 
 
 function ProductList() {
   // 상태 관리

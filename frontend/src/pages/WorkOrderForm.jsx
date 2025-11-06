@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllProducts } from '../services/productService';
 import { createWorkOrder } from '../services/workOrderService';
+import { showSuccess, showError, toastPromise } from '../utils/toast';
 
 function WorkOrderForm() {
   const navigate = useNavigate(); // 페이지 이동을 위한 hook
@@ -35,7 +36,7 @@ function WorkOrderForm() {
       setProducts(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error('제품 목록 로드 실패:', err);
-      setError('제품 목록을 불러오는데 실패했습니다.');
+      showError('제품 목록을 불러오는데 실패했습니다.');  
     }
   };
 
@@ -86,6 +87,7 @@ function WorkOrderForm() {
     
     // 폼 검증
     if (!validateForm()) {
+      //showError('입력값을 확인해주세요.');
       return;
     }
     

@@ -1,5 +1,7 @@
 // 작업지시 API 호출 함수 모음
 import api from './api';
+import { handleApiError } from '../utils/errorHandler';
+
 
 // WorkOrder API의 기본 경로
 const WORK_ORDER_BASE_URL = '/work-orders';
@@ -17,7 +19,7 @@ export const getAllWorkOrders = async (params = {}) => {
     const response = await api.get(WORK_ORDER_BASE_URL, { params });
     return response.data;
   } catch (error) {
-    console.error('작업지시 목록 조회 실패:', error);
+    handleApiError(error, '작업지시 목록을 불러오는데 실패했습니다.');
     throw error;
   }
 };
@@ -66,7 +68,7 @@ export const createWorkOrder = async (workOrderData) => {
     const response = await api.post(WORK_ORDER_BASE_URL, workOrderData);
     return response.data;
   } catch (error) {
-    console.error('작업지시 생성 실패:', error);
+    handleApiError(error, '작업지시 생성에 실패했습니다.');
     throw error;
   }
 };
@@ -82,7 +84,7 @@ export const updateWorkOrderStatus = async (id, status) => {
     const response = await api.patch(`${WORK_ORDER_BASE_URL}/${id}/status`, { status });
     return response.data;
   } catch (error) {
-    console.error(`작업지시 상태 변경 실패 (ID: ${id}):`, error);
+    handleApiError(error, `작업지시(ID: ${id}) 상태 변경에 실패했습니다.`);
     throw error;
   }
 };

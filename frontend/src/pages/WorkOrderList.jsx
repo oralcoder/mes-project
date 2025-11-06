@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllWorkOrders, updateWorkOrderStatus } from '../services/workOrderService';
+import { showSuccess, showInfo, showError, toastPromise } from '../utils/toast';
+import usePolling from '../hooks/usePolling';
 
 function WorkOrderList() {
   // 상태 관리
@@ -14,10 +16,25 @@ function WorkOrderList() {
   const [startDate, setStartDate] = useState(''); // 시작 날짜
   const [endDate, setEndDate] = useState(''); // 종료 날짜
 
+  // 폴링 활성화 상태 (토글 가능)
+  const [pollingEnabled, setPollingEnabled] = useState(false);
+
   // 컴포넌트 마운트 시 및 필터 변경 시 작업지시 목록 로드
   useEffect(() => {
     loadWorkOrders();
   }, [statusFilter, startDate, endDate]); // 필터가 변경될 때마다 재조회
+
+  // 폴링 설정 (5초마다 자동 새로고침)
+  const { isPolling } = usePolling(
+    () => {
+      // 로딩 중이 아닐 때만 폴링 실행
+      if (!loading) {
+        loadWorkOrders();
+      }
+    },
+    5000,  // 5초 간격
+    pollingEnabled  // 활성화 여부
+  );
 
   // 작업지시 목록 로드 함수
   const loadWorkOrders = async () => {
@@ -99,6 +116,17 @@ function WorkOrderList() {
     setEndDate('');
   };
 
+  // 폴링 토글 핸들러
+  const handleTogglePolling = () => {
+    setPollingEnabled(!pollingEnabled);
+    if (!pollingEnabled) {
+      showSuccess('자동 새로고침이 활성화되었습니다.');
+    } else {
+      showInfo('자동 새로고침이 비활성화되었습니다.');
+    }
+  };
+
+
   // 로딩 중 UI
   if (loading) {
     return (
@@ -140,16 +168,45 @@ function WorkOrderList() {
         
         {/* 페이지 헤더 */}
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">작업지시 관리</h1>
-          <Link 
-            to="/work-orders/new"
-            className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
-          >
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
-            </svg>
-            작업지시 생성
-          </Link>
+          <div className="flex items-center space-x-4">
+            <h1 className="text-3xl font-bold text-gray-900">작업지시 관리</h1>
+            
+            {/* 폴링 상태 표시 */}
+            {isPolling && (
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                <span className="w-2 h-2 mr-1.5 bg-green-600 rounded-full animate-pulse"></span>
+                실시간 업데이트 중
+              </span>
+            )}
+          </div>
+
+          <div className="flex items-center space-x-3">
+            {/* 자동 새로고침 토글 버튼 */}
+            <button
+              onClick={handleTogglePolling}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                pollingEnabled
+                  ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              <svg className="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              {pollingEnabled ? '자동 새로고침 켜짐' : '자동 새로고침 꺼짐'}
+            </button>
+
+            {/* 작업지시 생성 버튼 */}
+            <Link 
+              to="/work-orders/new"
+              className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+            >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+              </svg>
+              작업지시 생성
+            </Link>
+          </div>
         </div>
 
         {/* 필터 영역 */}
