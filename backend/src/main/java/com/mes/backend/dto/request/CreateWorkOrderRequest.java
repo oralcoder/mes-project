@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 작업지시 생성 요청 DTO
@@ -43,5 +44,11 @@ public class CreateWorkOrderRequest {
      * 지시일자
      */
     @NotNull(message = "지시일자는 필수입니다")
-    private LocalDate orderDate;
+    private LocalDateTime orderDate;
+
+    /**
+     * 납기일자
+     */
+    @NotNull(message = "납기일자는 필수입니다")
+    private LocalDateTime dueDate;
 }

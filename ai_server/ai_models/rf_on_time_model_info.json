@@ -1,0 +1,13 @@
+{
+  "features": [
+    "product_id",
+    "quantity",
+    "month",
+    "day_of_week",
+    "days_to_due_minutes"
+  ],
+  "target": "is_on_time",
+  "accuracy": 0.8025,
+  "n_train": 1600,
+  "n_test": 400
+}

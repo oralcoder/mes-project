@@ -311,6 +311,9 @@ function WorkOrderList() {
                         지시일
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        납기일
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         작업
                       </th>
                     </tr>
@@ -340,7 +343,10 @@ function WorkOrderList() {
                           </span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {new Date(workOrder.orderDate).toLocaleDateString('ko-KR')}
+                          {new Date(workOrder.orderDate).toLocaleString('ko-KR')}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {new Date(workOrder.dueDate).toLocaleString('ko-KR')}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                           {/* 상태 변경 버튼 */}

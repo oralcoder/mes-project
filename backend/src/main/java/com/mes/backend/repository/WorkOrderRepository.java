@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +36,7 @@ public interface WorkOrderRepository extends JpaRepository<WorkOrder, Long> {
     /**
      * 지시일자 범위로 조회
      */
-    List<WorkOrder> findByOrderDateBetween(LocalDate startDate, LocalDate endDate);
+    List<WorkOrder> findByOrderDateBetween(LocalDateTime startDate, LocalDateTime endDate);
 
     /**
      * 제품 정보를 포함하여 전체 조회 (Fetch Join)

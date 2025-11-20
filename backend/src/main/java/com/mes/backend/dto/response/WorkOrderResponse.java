@@ -30,7 +30,8 @@ public class WorkOrderResponse {
     private Integer quantity;
     private WorkOrderStatus status;
     private String statusDescription;
-    private LocalDate orderDate;
+    private LocalDateTime orderDate;
+    private LocalDateTime dueDate;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private LocalDateTime createdAt;
@@ -50,6 +51,7 @@ public class WorkOrderResponse {
                 .status(workOrder.getStatus())
                 .statusDescription(workOrder.getStatus().getDescription())
                 .orderDate(workOrder.getOrderDate())
+                .dueDate(workOrder.getDueDate())
                 .startDate(workOrder.getStartDate())
                 .endDate(workOrder.getEndDate())
                 .createdAt(workOrder.getCreatedAt())

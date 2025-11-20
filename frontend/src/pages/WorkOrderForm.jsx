@@ -13,7 +13,8 @@ function WorkOrderForm() {
     orderNo: '',
     productId: '',
     quantity: '',
-    orderDate: new Date().toISOString().split('T')[0], // 오늘 날짜
+    orderDate: new Date().toISOString(), // 오늘 날짜
+    dueDate: new Date().toISOString(), // 오늘 날짜
   });
   
   // 제품 목록 상태
@@ -234,7 +235,7 @@ function WorkOrderForm() {
                 지시일 <span className="text-red-500">*</span>
               </label>
               <input
-                type="date"
+                type="datetime-local"
                 id="orderDate"
                 name="orderDate"
                 value={formData.orderDate}
@@ -245,6 +246,25 @@ function WorkOrderForm() {
               />
               {validationErrors.orderDate && (
                 <p className="mt-1 text-sm text-red-600">{validationErrors.orderDate}</p>
+              )}
+            </div>
+            {/* 납기일 */}
+            <div>
+              <label htmlFor="dueDate" className="block text-sm font-medium text-gray-700 mb-2">
+                납기일 <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="datetime-local"
+                id="dueDate"
+                name="dueDate"
+                value={formData.dueDate}
+                onChange={handleChange}
+                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  validationErrors.dueDate ? 'border-red-500' : 'border-gray-300'
+                }`}
+              />
+              {validationErrors.dueDate && (
+                <p className="mt-1 text-sm text-red-600">{validationErrors.dueDate}</p>
               )}
             </div>
 

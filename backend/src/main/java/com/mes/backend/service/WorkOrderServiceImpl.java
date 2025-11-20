@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.time.format.DateTimeFormatter;
 
 /**
  * 작업지시 서비스 구현
@@ -33,8 +34,8 @@ public class WorkOrderServiceImpl implements WorkOrderService {
     @Override
     @Transactional
     public WorkOrderResponse createWorkOrder(CreateWorkOrderRequest request) {
-        log.info("작업지시 생성 요청: orderNo={}, productId={}, quantity={}",
-                request.getOrderNo(), request.getProductId(), request.getQuantity());
+        log.info("작업지시 생성 요청: orderNo={}, productId={}, quantity={}, orderDate={} dueDate={}",
+                request.getOrderNo(), request.getProductId(), request.getQuantity(), request.getOrderDate(), request.getDueDate());
 
         // 1. 지시번호 중복 체크
         if (workOrderRepository.existsByOrderNo(request.getOrderNo())) {
@@ -56,7 +57,12 @@ public class WorkOrderServiceImpl implements WorkOrderService {
                 .quantity(request.getQuantity())
                 .status(WorkOrderStatus.PLANNED)  // 초기 상태는 계획
                 .orderDate(request.getOrderDate())
+                .dueDate(request.getDueDate())
                 .build();
+
+        // AI 예측 로직 추가 가능 (납기 준수 여부)
+        boolean is_on_time = callAiOnTimePredictionApi(workOrder);
+        log.info("AI 납기 준수 예측 결과: is_on_time={}", is_on_time);
 
         WorkOrder savedWorkOrder = workOrderRepository.save(workOrder);
 
@@ -65,6 +71,36 @@ public class WorkOrderServiceImpl implements WorkOrderService {
 
         return WorkOrderResponse.from(savedWorkOrder);
     }
+    private static final DateTimeFormatter DATETIME_FORMATTER =
+        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private boolean callAiOnTimePredictionApi(WorkOrder wo) {
+    try {
+        org.springframework.web.client.RestTemplate restTemplate = new org.springframework.web.client.RestTemplate();
+
+        java.util.Map<String, Object> payload = new java.util.HashMap<>();
+        payload.put("productId", wo.getProduct().getId());
+        payload.put("quantity", wo.getQuantity());
+        payload.put("orderDate", wo.getOrderDate().format(DATETIME_FORMATTER));
+        payload.put("dueDate", wo.getDueDate().format(DATETIME_FORMATTER));
+
+        org.springframework.http.ResponseEntity<java.util.Map> resp =
+                restTemplate.postForEntity("http://ai-server:8000/is_on_time", payload, java.util.Map.class);
+        // ↑ URL/포트는 실제 환경에 맞춰 수정
+
+        if (resp.getStatusCode().is2xxSuccessful() && resp.getBody() != null) {
+            Object v = resp.getBody().get("is_on_time");  // FastAPI 응답 키와 맞추기
+            if (v instanceof Boolean) {
+                return (Boolean) v;
+            }
+        }
+
+        log.warn("AI 응답 파싱 실패, 기본값 false 적용");
+        return false;
+    } catch (Exception e) {
+        log.error("AI 예측 API 호출 실패", e);
+        return false;
+    }
+}
 
     @Override
     public WorkOrderResponse getWorkOrderById(Long id) {

@@ -53,10 +53,16 @@ public class WorkOrder {
     private WorkOrderStatus status;
 
     /**
-     * 지시일자
+     * 지시일시
      */
     @Column(name = "order_date", nullable = false)
-    private LocalDate orderDate;
+    private LocalDateTime orderDate;
+
+    /**
+     * 납기일
+     */
+    @Column(name = "due_date", nullable = false)
+    private LocalDateTime dueDate;
 
     /**
      * 작업 시작일시

@@ -153,12 +153,42 @@ services:
     networks:
       - mes-network
 
+  ai-server:
+    build:
+      context: ./ai_server               # Dockerfile 위치
+      dockerfile: Dockerfile
+    container_name: ai-server
+    ports:
+      - "8000:8000"                # 호스트:컨테이너 포트 매핑
+    volumes:
+      - ./ai_server:/app                 # 호스트 App 폴더를 컨테이너 /app에 마운트
+
+    # 네트워크 설정
+    networks:
+      - mes-network
+  
+  # ========================================
+  # Ollama 서버
+  # ========================================
+
+  ollama:
+    image: ollama/ollama
+    container_name: ollama-server
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    
+    # 네트워크 설정
+    networks:
+      - mes-network
 
 # ========================================
 # Docker 볼륨 
 # ========================================
 volumes:
   node_modules_frontend:
+  ollama_data:
 
 
 # ========================================

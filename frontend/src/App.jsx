@@ -4,6 +4,10 @@ import ProductList from './pages/ProductList';
 import WorkOrderList from './pages/WorkOrderList';
 import WorkOrderForm from './pages/WorkOrderForm';
 import Dashboard from './pages/Dashboard';
+import DefectInspection from './pages/DefectInspection.jsx';
+import ChipDetection from './pages/ChipDetection';
+import LLMChat from './pages/LLMChat';
+
 
 
 function App() {
@@ -27,6 +31,36 @@ function App() {
             
             {/* 네비게이션 */}
             <nav className="flex space-x-4">
+              <Link 
+                to="/llm_chat" 
+                className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                  isActive('/llm_chat')
+                    ? 'text-white bg-blue-600'
+                    : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
+                }`}
+              >
+                LLM CHAT
+              </Link>
+              <Link 
+                to="/defect_inspection" 
+                className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                  isActive('/defect_inspection')
+                    ? 'text-white bg-blue-600'
+                    : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
+                }`}
+              >
+                결함 검사
+              </Link>
+              <Link 
+                to="/chip_detection" 
+                className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                  isActive('/chip_detection')
+                    ? 'text-white bg-blue-600'
+                    : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
+                }`}
+              >
+                Chip 탐지
+              </Link>
               <Link 
                 to="/dashboard" 
                 className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
@@ -79,6 +113,15 @@ function App() {
         <Routes>
           {/* 기본 경로: 제품 목록으로 리다이렉트 */}
           <Route path="/" element={<ProductList />} />
+
+          {/* 결함 검사 */}
+          <Route path="/defect_inspection" element={<DefectInspection />} />
+
+          {/* Chip 탐지 */}
+          <Route path="/chip_detection" element={<ChipDetection />} />   
+
+          {/* LLM CHAT */}        
+          <Route path="/llm_chat" element={<LLMChat />} />        
 
           {/* 대시보드 */}
           <Route path="/dashboard" element={<Dashboard />} />
