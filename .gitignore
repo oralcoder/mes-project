@@ -6,3 +6,6 @@ postgres-data/
 *.iml
 *.log
 node_modules/
+
+**/__pycache__/
+**/*.pyc
